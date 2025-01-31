@@ -46,87 +46,75 @@ Menu Principal
    Verde: Títulos
    Branco: Opções
 
-4. Varreduras Básicas (basic_scans)
-Opção	Comando Nmap	Descrição
-
-        1	nmap -sn	Ping sweep para hosts ativos
-        2	nmap -sS -T4	SYN scan em portas comuns (1000)
-        3	nmap -p- -T4	Varredura completa TCP (1-65535)
-        4	nmap -sU -T4	Varredura UDP básica
-
-Flags Especiais:
-
-    -T4: Timing agressivo (6 níveis)
-
-    -p-: Todas portas TCP
-
-    -sU: Modo UDP
 
 
-5. Varreduras Avançadas (advanced_scans)
+4. Varredunas Básicas (basic_scans)
 
-Técnica      	Comando	         Uso Típico
-
-Stealth(SYN)	 -sS	   Evasão básica
-
-ACK Scan	     -sA	   Mapear regras firewall
-
-FIN Scan	     -sF	   Bypass stateless FW
-
-XMAS Tree	     -sX	   Envio de flags múltiplas
-
-NULL Scan	     -sN	   Pacotes sem flags
-
-6. Técnicas de Evasão (firewall_evasion)
-
-Técnica	        Implementação	                        Exemplo
-
-Fragmentação	          -f	                   Divide pacotes em 8 bytes
-
-Decoys	           -D decoy1,decoy2,ME             Ofusca IP real
-
-Spoofing	       -S IP_FALSO -e INTERF	       Falsificação de origem
-
-Porta Source	         -g 53	                   Usa porta 53 como origem
-
-MTU Customizado	       --mtu 24	                    Pacotes de 24 bytes
-
-7. Detecção de OS/Serviços (os_services)
-
-Opção	      Comando	                  Detalhe
-
-1	          nmap -O	                Fingerprinting de OS
-
-2             nmap -sV	                Versões de serviços
-
-3     	--version-intensity 5	        Análise máxima (0-9)
-
-4	      --traceroute	                Mapeamento de rotas
+| Opção | Comando Nmap       | Descrição                                |
+|-------|--------------------|------------------------------------------|
+| 1     | nmap -sn           | Ping sweep para hosts ativos            |
+| 2     | nmap -sS -T4       | SYN scan em portas comuns (1000)         |
+| 3     | nmap -p- -T4       | Varredura completa TCP (1-65535)         |
+| 4     | nmap -sU -T4       | Varredura UDP básica                     |
 
 
-8. Scripts NSE (nse_scans)
+# Flags Especiais
 
-Script               	Função	                             Exemplo de Uso
+- **-T4**: Timing agressivo (6 níveis)
+- **-p-**: Todas portas TCP
+- **-sU**: Modo UDP
 
-vuln	        Verifica vulnerabilidades comuns	          --script vuln
 
-http-enum	    Enumeração de diretórios web	              -p 80,443 --script http-enum
 
-dns-brute	    Força bruta de subdomínios             	      --script dns-brute
+5. # Varreduras Avançadas (advanced_scans)
 
-malware	        Detecção de backdoors	                      --script malware
+| Técnica        | Comando | Uso Típico               |
+|----------------|---------|--------------------------|
+| Stealth(SYN)   | -sS     | Evasão básica            |
+| ACK Scan       | -sA     | Mapear regras firewall   |
+| FIN Scan       | -sF     | Bypass stateless FW      |
+| XMAS Tree      | -sX     | Envio de flags múltiplas |
+| NULL Scan      | -sN     | Pacotes sem flags        |
 
-9. Output de Resultados (output_options)
 
-Formato	                Extensão	               Característica
+# 6. Técnicas de Evasão (firewall_evasion)
 
-Normal	                .nmap	                   Legível para humanos
+| Técnica         | Implementação                     | Exemplo                                   |
+|-----------------|-----------------------------------|-------------------------------------------|
+| Fragmentação    | `-f`                              | Divide pacotes em 8 bytes                 |
+| Decoys          | `-D decoy1,decoy2,ME`             | Ofusca IP real                            |
+| Spoofing        | `-S IP_FALSO -e INTERF`           | Falsificação de origem                    |
+| Porta Source    | `-g 53`                           | Usa porta 53 como origem                  |
+| MTU Customizado | `--mtu 24`                        | Pacotes de 24 bytes                       |
 
-XML	                    .xml	                   Estruturado para parsing
+# 7. Detecção de OS/Serviços (os_services)
 
-Grepable	            .gnmap	                   Formatado para grep/awk
+| Opção               | Comando                     | Detalhe                          |
+|---------------------|-----------------------------|----------------------------------|
+| 1                   | `nmap -O`                   | Fingerprinting de OS            |
+| 2                   | `nmap -sV`                  | Versões de serviços             |
+| 3                   | `--version-intensity 5`     | Análise máxima (0-9)            |
+| 4                   | `--traceroute`              | Mapeamento de rotas             |
 
-Todos	                Múltiplo	               Gera os 3 formatos simultaneamente
+
+# 8. Scripts NSE (nse_scans)
+
+| Script       | Função                                | Exemplo de Uso                     |
+|--------------|---------------------------------------|------------------------------------|
+| `vuln`       | Verifica vulnerabilidades comuns      | `--script vuln`                   |
+| `http-enum`  | Enumeração de diretórios web          | `-p 80,443 --script http-enum`    |
+| `dns-brute`  | Força bruta de subdomínios            | `--script dns-brute`              |
+| `malware`    | Detecção de backdoors                 | `--script malware`                |
+
+
+# 9. Output de Resultados (output_options)
+
+| Formato      | Extensão   | Característica                          |
+|--------------|------------|-----------------------------------------|
+| Normal       | `.nmap`    | Legível para humanos                    |
+| XML          | `.xml`     | Estruturado para parsing                |
+| Grepable     | `.gnmap`   | Formatado para grep/awk                 |
+| Todos        | Múltiplo   | Gera os 3 formatos simultaneamente      |
 
 10. Modo Agressivo
 
