@@ -94,9 +94,13 @@ MTU Customizado	       --mtu 24	                    Pacotes de 24 bytes
 7. Detecção de OS/Serviços (os_services)
 
 Opção	      Comando	                  Detalhe
+
 1	          nmap -O	                Fingerprinting de OS
+
 2             nmap -sV	                Versões de serviços
+
 3     	--version-intensity 5	        Análise máxima (0-9)
+
 4	      --traceroute	                Mapeamento de rotas
 
 
