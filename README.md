@@ -4,7 +4,7 @@ Este script é uma interface simplificada para o Nmap com menu interativo, desen
 
 Instalação
 
-    git clone https://github.com/Caio-Campolino/
+    git clone https://github.com/Caio-Campolino/BERSERKER/berserker.git
 
     cd hellraiser-scanner
 
