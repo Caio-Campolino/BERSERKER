@@ -6,11 +6,11 @@ Instalação
 
     git clone https://github.com/Caio-Campolino/BERSERKER/berserker.git
 
-    cd hellraiser-scanner
+    cd BERSERKER
 
-    chmod +x hellraiser.sh
+    chmod +x berserk.sh
 
-    sudo ./hellraiser.sh
+    sudo ./berserker.sh
 
 1. Verificação Inicial
    
@@ -79,25 +79,25 @@ NULL Scan	     -sN	   Pacotes sem flags
 
 6. Técnicas de Evasão (firewall_evasion)
 
-Técnica	        Implementação	   Exemplo
+Técnica	        Implementação	                        Exemplo
 
-Fragmentação	          -f	           Divide pacotes em 8 bytes
+Fragmentação	          -f	                   Divide pacotes em 8 bytes
 
-Decoys	                -D             decoy1,decoy2,ME	Ofusca IP real
+Decoys	           -D decoy1,decoy2,ME             Ofusca IP real
 
-Spoofing	    -S IP_FALSO -e INTERF	   Falsificação de origem
+Spoofing	       -S IP_FALSO -e INTERF	       Falsificação de origem
 
-Porta Source	         -g 53	         Usa porta 53 como origem
+Porta Source	         -g 53	                   Usa porta 53 como origem
 
-MTU Customizado	     --mtu 24	         Pacotes de 24 bytes
+MTU Customizado	       --mtu 24	                    Pacotes de 24 bytes
 
 7. Detecção de OS/Serviços (os_services)
 
 Opção	      Comando	                  Detalhe
-1	       nmap -O	                Fingerprinting de OS
-2        nmap -sV	                Versões de serviços
-3     	--version-intensity 5	    Análise máxima (0-9)
-4	      --traceroute	            Mapeamento de rotas
+1	          nmap -O	                Fingerprinting de OS
+2             nmap -sV	                Versões de serviços
+3     	--version-intensity 5	        Análise máxima (0-9)
+4	      --traceroute	                Mapeamento de rotas
 
 
 8. Scripts NSE (nse_scans)
@@ -106,16 +106,16 @@ Script               	Função	                             Exemplo de Uso
 
 vuln	        Verifica vulnerabilidades comuns	          --script vuln
 http-enum	    Enumeração de diretórios web	              -p 80,443 --script http-enum
-dns-brute	    Força bruta de subdomínios             	    --script dns-brute
-malware	      Detecção de backdoors	                      --script malware
+dns-brute	    Força bruta de subdomínios             	      --script dns-brute
+malware	        Detecção de backdoors	                      --script malware
 
 9. Output de Resultados (output_options)
 
 Formato	                Extensão	               Característica
 Normal	                .nmap	                   Legível para humanos
 XML	                    .xml	                   Estruturado para parsing
-Grepable	              .gnmap	                 Formatado para grep/awk
-Todos	                  Múltiplo	               Gera os 3 formatos simultaneamente
+Grepable	            .gnmap	                   Formatado para grep/awk
+Todos	                Múltiplo	               Gera os 3 formatos simultaneamente
 
 10. Modo Agressivo
 
