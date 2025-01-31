@@ -105,16 +105,23 @@ Opção	      Comando	                  Detalhe
 Script               	Função	                             Exemplo de Uso
 
 vuln	        Verifica vulnerabilidades comuns	          --script vuln
+
 http-enum	    Enumeração de diretórios web	              -p 80,443 --script http-enum
+
 dns-brute	    Força bruta de subdomínios             	      --script dns-brute
+
 malware	        Detecção de backdoors	                      --script malware
 
 9. Output de Resultados (output_options)
 
 Formato	                Extensão	               Característica
+
 Normal	                .nmap	                   Legível para humanos
+
 XML	                    .xml	                   Estruturado para parsing
+
 Grepable	            .gnmap	                   Formatado para grep/awk
+
 Todos	                Múltiplo	               Gera os 3 formatos simultaneamente
 
 10. Modo Agressivo
