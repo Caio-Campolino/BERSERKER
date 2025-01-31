@@ -1,0 +1,199 @@
+#!/bin/bash
+
+# Verificar se o Nmap está instalado
+if ! command -v nmap &> /dev/null; then
+    echo -e "\e[1;31m[!] Nmap não está instalado. Instale primeiro:\e[0m"
+    echo "sudo apt-get install nmap"
+    exit 1
+fi
+
+# Função para exibir o banner
+show_banner() {
+    clear
+    echo -e "\e[1;31m"
+    echo "       ____  _____ ____  ____  _____ ____  _  _______ ____       "
+    echo "      | __ )| ____|  _ \/ ___|| ____|  _ \| |/ / ____|  _ \      "
+    echo "      |  _ \|  _| | |_) \___ \|  _| | |_) | ' /|  _| | |_) |     "
+    echo "      | |_) | |___|  _ < ___) | |___|  _ <| . \| |___|  _ <      "
+    echo "      |____/|_____|_| \_\____/|_____|_| \_\_|\_\_____|_| \_\     "
+    echo "                                                                 "
+    echo "                                                                 "
+    echo -e "\e[0m"
+}
+
+# Menu principal
+show_menu() {
+    show_banner
+    echo -e "\e[1;32m[ MENU PRINCIPAL ]\e[0m"
+    echo -e "1. Varreduras Básicas"
+    echo -e "2. Varreduras Avançadas"
+    echo -e "3. Evasão de Firewall/IDS"
+    echo -e "4. Detecção de OS/Serviços"
+    echo -e "5. Varreduras com Scripts NSE"
+    echo -e "6. Opções de Output"
+    echo -e "7. Modo Agressivo"
+    echo -e "8. Sair\e"
+    echo
+    read -p "Escolha uma categoria: " main_choice
+}
+
+# Funções de varredura
+basic_scans() {
+    echo -e "\n\e[1;34m[ VARREDURAS BÁSICAS ]\e[0m"
+    echo "1. Varredura de Hosts Ativos (Ping Sweep)"
+    echo "2. Varredura TCP de Portas Comuns"
+    echo "3. Varredura TCP de Todas as Portas (1-65535)"
+    echo "4. Varredura UDP de Portas Comuns"
+    echo "5. Voltar"
+    read -p "Escolha: " scan_choice
+
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $scan_choice in
+        1) nmap -sn $target ;;
+        2) nmap -sS -T4 $target ;;
+        3) nmap -p- -T4 $target ;;
+        4) nmap -sU -T4 $target ;;
+        5) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+advanced_scans() {
+    echo -e "\n\e[1;34m[ VARREDURAS AVANÇADAS ]\e[0m"
+    echo "1. Varredura Stealth (SYN)"
+    echo "2. Varredura ACK"
+    echo "3. Varredura FIN"
+    echo "4. Varredura XMAS"
+    echo "5. Varredura NULL"
+    echo "6. Voltar"
+    read -p "Escolha: " scan_choice
+
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $scan_choice in
+        1) nmap -sS -T4 $target ;;
+        2) nmap -sA -T4 $target ;;
+        3) nmap -sF -T4 $target ;;
+        4) nmap -sX -T4 $target ;;
+        5) nmap -sN -T4 $target ;;
+        6) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+firewall_evasion() {
+    echo -e "\n\e[1;34m[ TÉCNICAS DE EVASÃO ]\e[0m"
+    echo "1. Fragmentação de Pacotes"
+    echo "2. Usar Decoys"
+    echo "3. IP Spoofing"
+    echo "4. Porta Source Aleatória"
+    echo "5. Scan com MTU Personalizado"
+    echo "6. Voltar"
+    read -p "Escolha: " evasion_choice
+
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $evasion_choice in
+        1) nmap -f $target ;;
+        2) read -p "Digite os decoys (ex: 192.168.1.5,ME,RND): " decoys
+           nmap -D $decoys $target ;;
+        3) read -p "Digite IP falso: " spoof
+           nmap -S $spoof $target ;;
+        4) nmap -g 53 $target ;;
+        5) read -p "Digite MTU (ex: 24): " mtu
+           nmap --mtu $mtu $target ;;
+        6) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+os_services() {
+    echo -e "\n\e[1;34m[ DETECÇÃO AVANÇADA ]\e[0m"
+    echo "1. Detectar Sistema Operacional"
+    echo "2. Detectar Versões de Serviços"
+    echo "3. Detecção de Serviços Intensa"
+    echo "4. Traceroute"
+    echo "5. Voltar"
+    read -p "Escolha: " detect_choice
+
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $detect_choice in
+        1) nmap -O $target ;;
+        2) nmap -sV $target ;;
+        3) nmap -sV --version-intensity 5 $target ;;
+        4) nmap --traceroute $target ;;
+        5) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+nse_scans() {
+    echo -e "\n\e[1;34m[ SCRIPTS NSE ]\e[0m"
+    echo "1. Scan de Vulnerabilidades Comuns"
+    echo "2. Scan de Diretórios Web"
+    echo "3. Bruteforce DNS"
+    echo "4. Detecção de Malware"
+    echo "5. Scan Personalizado"
+    echo "6. Voltar"
+    read -p "Escolha: " nse_choice
+
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $nse_choice in
+        1) nmap --script vuln $target ;;
+        2) read -p "Digite a porta HTTP(S): " port
+           nmap --script http-enum -p $port $target ;;
+        3) nmap --script dns-brute $target ;;
+        4) nmap --script malware $target ;;
+        5) read -p "Digite o script NSE: " script
+           nmap --script $script $target ;;
+        6) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+output_options() {
+    echo -e "\n\e[1;34m[ OPÇÕES DE OUTPUT ]\e[0m"
+    echo "1. Salvar em Formato Normal"
+    echo "2. Salvar em Formato XML"
+    echo "3. Salvar em Formato Grepable"
+    echo "4. Salvar em Todos os Formatos"
+    echo "5. Voltar"
+    read -p "Escolha: " output_choice
+
+    read -p "Digite o nome do arquivo: " filename
+    read -p "Digite o alvo (IP/Rede): " target
+    
+    case $output_choice in
+        1) nmap -oN $filename $target ;;
+        2) nmap -oX $filename $target ;;
+        3) nmap -oG $filename $target ;;
+        4) nmap -oA $filename $target ;;
+        5) return ;;
+        *) echo "Opção inválida!" ;;
+    esac
+}
+
+aggressive_scan() {
+    read -p "Digite o alvo (IP/Rede): " target
+    nmap -A -T4 $target
+}
+
+# Loop principal
+while true; do
+    show_menu
+    case $main_choice in
+        1) basic_scans ;;
+        2) advanced_scans ;;
+        3) firewall_evasion ;;
+        4) os_services ;;
+        5) nse_scans ;;
+        6) output_options ;;
+        7) aggressive_scan ;;
+        8) echo "Saindo..."; exit 0 ;;
+        *) echo "Opção inválida!" ;;
+    esac
+    read -p "Pressione Enter para continuar..."
+done
