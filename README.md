@@ -1,4 +1,4 @@
-𒉭 BERSERKER Network Scanner 𒉭
+BERSERKER Network Scanner 
 
 Este script é uma interface simplificada para o Nmap com menu interativo, desenvolvido para automatizar varreduras de rede complexas. Organizado em categorias temáticas, oferece acesso rápido às principais funcionalidades do Nmap através de uma interface intuitiva.
 
